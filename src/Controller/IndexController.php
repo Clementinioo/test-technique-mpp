@@ -9,9 +9,16 @@ class IndexController extends AbstractController
 {
     public function index(): Response
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $token = $this->get('security.token_storage')->getToken();
+        if ($token != NULL) {
+            $user = $token->getUsername();
+        } else {
+            $user = "";
+        }
+        //var_dump($user);
         return $this->render('index/index.html.twig', [
-            'username' => $user->getUsername(),
+            'username' => $user,
         ]);
     }
 }
