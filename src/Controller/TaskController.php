@@ -29,27 +29,15 @@ class TaskController extends AbstractController
         $task = new Task();
         $form = $this->createFormBuilder($task)
             ->add('description', TextType::class)
-            ->add('id_liste', EntityType::class, [
-                'class' => Liste::class,
-                'query_builder' => function (ListeRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->andWhere('u.owner = :val')
-                        ->setParameter('val', $this->getUser()->getUsername())
-                        ->orderBy('u.name', 'ASC');
-                },
-                'choice_label' => 'name',
-            ])
+            ->add('id_liste', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Valider'])
             ->getForm();
 
-        dump($form->handleRequest($request));
-        die;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $task->setOwner($this->getUser()->getUsername());
             $em->persist($task);
             $em->flush();
             echo 'Tâche créé';
