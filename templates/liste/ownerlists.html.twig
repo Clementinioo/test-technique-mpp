@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		{% if liste is not empty %}
+		{% if liste is not null %}
 			<table>
 				<thead>
 					<tr>
@@ -18,10 +18,10 @@
 							<td>{{ q.name }}</td>
 							<td>{{ q.owner }}</td>
 							<td>
-								<a href="#">Supprimer</a>
+								<a href="/liste/delete/{{ q.id }}">Supprimer</a>
 							</td>
 							<td>
-								<a href="#">Editer</a>
+								<a href="/liste/edit/{{ q.id }}">Editer</a>
 							</td>
 						</tr>
 					{% endfor %}

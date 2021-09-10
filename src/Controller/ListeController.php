@@ -64,9 +64,63 @@ class ListeController extends AbstractController
         $array = array();
         $liste = $repository->testFunction($this->getUser()->getUsername());
         array_push($array, $liste);
+        if ($array[0] != null) {
+            return $this->render(
+                'liste/ownerlists.html.twig',
+                array('liste' => $array)
+            );
+        } else {
+            return $this->render(
+                'liste/ownerlists.html.twig',
+                array('liste' => null)
+            );
+        }
+    }
+
+    /**
+     * @Route("/liste/delete/{id}" , name="liste_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $liste = $this->getDoctrine()->getRepository(Liste::class);
+        $liste = $liste->find($id);
+        if (!$liste) {
+            throw $this->createNotFoundException(
+                'Il n\'y a pas de liste avec l\'id : ' . $id
+            );
+        }
+        $em->remove($liste);
+        $em->flush();
+        return $this->redirect($this->generateUrl('my_lists'));
+    }
+
+    /**
+     * @Route("/liste/edit/{id}", name="liste_edit")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $liste = $this->getDoctrine()->getRepository(Liste::class);
+        $liste = $liste->find($id);
+        if (!$liste) {
+            throw $this->createNotFoundException(
+                'Il n\'y a pas de liste avec l\'id : ' . $id
+            );
+        }
+        $form = $this->createFormBuilder($liste)
+            ->add('name', TextType::class)
+            ->add('save', SubmitType::class, array('label' => 'Editer'))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $liste = $form->getData();
+            $em->flush();
+            return $this->redirect($this->generateUrl('my_lists'));
+        }
         return $this->render(
-            'liste/ownerlists.html.twig',
-            array('liste' => $array)
+            'liste/edit.html.twig',
+            array('form' => $form->createView())
         );
     }
 }

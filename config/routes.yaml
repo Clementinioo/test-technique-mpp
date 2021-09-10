@@ -17,3 +17,11 @@ liste_all:
 my_lists:
     path: /my/lists
     controller: App\Controller\ListeController::showOwnLists
+
+liste-delete:
+    path: /liste/delete
+    controller: App\Controller\ListeController:deleteAction
+
+liste-edit:
+    path: /liste/edit
+    controller: App\Controller\ListeController:updateAction

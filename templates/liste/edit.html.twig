@@ -1,0 +1,21 @@
+<h1>
+	Edition d'une liste
+</h1>
+<div class="container">
+	<div class="row">
+		{{ form_start(form) }}
+		<table>
+			<tbody>
+				<tr>
+					<th>Nom de la liste:</th>
+					<td>{{ form_widget(form.name) }}</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>{{ form_widget(form.save) }}</td>
+				</tr>
+			</tbody>
+		</table>
+		{{ form_end(form) }}
+	</div>
+</div></body></html>
