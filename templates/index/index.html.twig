@@ -3,10 +3,18 @@
 		Vous êtes bien connecté en tant que
 		{{ username }}
 	</p>
-	<a href="{{ path('liste_new') }}">Créer une liste</a>
-	<a href="{{ path('liste_all') }}">Voir les listes</a>
-	<a href="{{ path('my_lists') }}">Editer mes listes</a>
-	<br>
+	<div class="row">
+		<a href="{{ path('liste_new') }}">Créer une liste</a>
+		<br>
+		<a href="{{ path('task_new') }}">Créer une tâche</a>
+		<br>
+		<hr style="width:10%; margin-left:0;">
+		<a href="{{ path('liste_all') }}">Voir les listes</a>
+		<br>
+		<a href="{{ path('my_lists') }}">Editer mes listes</a>
+		<br>
+		<hr style="width:10%; margin-left:0;">
+	</div>
 	<a href="{{ path('app_logout') }}">Déconnexion</a>
 
 {% else %}

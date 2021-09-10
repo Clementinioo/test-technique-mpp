@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 index:
     path: /
     controller: App\Controller\IndexController::index
@@ -25,3 +21,7 @@ liste-delete:
 liste-edit:
     path: /liste/edit
     controller: App\Controller\ListeController:updateAction
+
+task_new:
+    path: /task/new
+    controller: App\Controller\TaskController:createAction
