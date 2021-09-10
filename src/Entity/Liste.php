@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ListeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,20 +25,9 @@ class Liste
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="listes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $owner;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="list_owner")
-     */
-    private $tasks;
-
-    public function __construct()
-    {
-        $this->tasks = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -59,44 +46,14 @@ class Liste
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOwner(): ?string
     {
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): self
+    public function setOwner(string $owner): self
     {
         $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): self
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks[] = $task;
-            $task->setListOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): self
-    {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getListOwner() === $this) {
-                $task->setListOwner(null);
-            }
-        }
 
         return $this;
     }

@@ -39,11 +39,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Liste::class, mappedBy="owner")
-     */
-    private $listes;
-
     public function __construct()
     {
         $this->listes = new ArrayCollection();
@@ -131,35 +126,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return Collection|Liste[]
-     */
-    public function getListes(): Collection
-    {
-        return $this->listes;
-    }
-
-    public function addListe(Liste $liste): self
-    {
-        if (!$this->listes->contains($liste)) {
-            $this->listes[] = $liste;
-            $liste->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeListe(Liste $liste): self
-    {
-        if ($this->listes->removeElement($liste)) {
-            // set the owning side to null (unless already changed)
-            if ($liste->getOwner() === $this) {
-                $liste->setOwner(null);
-            }
-        }
-
-        return $this;
     }
 }

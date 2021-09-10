@@ -25,10 +25,9 @@ class Task
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Liste::class, inversedBy="tasks")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $list_owner;
+    private $id_liste;
 
     public function getId(): ?int
     {
@@ -47,14 +46,14 @@ class Task
         return $this;
     }
 
-    public function getListOwner(): ?Liste
+    public function getIdListe(): ?int
     {
-        return $this->list_owner;
+        return $this->id_liste;
     }
 
-    public function setListOwner(?Liste $list_owner): self
+    public function setIdListe(int $id_liste): self
     {
-        $this->list_owner = $list_owner;
+        $this->id_liste = $id_liste;
 
         return $this;
     }

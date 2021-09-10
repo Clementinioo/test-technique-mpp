@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		{% if liste is not empty %}
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Auteur</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for l in liste %}
+						<tr>
+							<td>{{ l.id }}</td>
+							<td>{{ l.name }}</td>
+							<td>{{ l.owner }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No list found.</p>
+		{% endif %}
+	</div>
+</div>
+
+<a href="{{ path('index') }}">Retour au menu</a>

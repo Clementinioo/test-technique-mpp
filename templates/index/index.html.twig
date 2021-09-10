@@ -3,7 +3,10 @@
 		Vous êtes bien connecté en tant que
 		{{ username }}
 	</p>
-
+	<a href="{{ path('liste_new') }}">Créer une liste</a>
+	<a href="{{ path('liste_all') }}">Voir les listes</a>
+	<a href="{{ path('my_lists') }}">Editer mes listes</a>
+	<br>
 	<a href="{{ path('app_logout') }}">Déconnexion</a>
 
 {% else %}

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Liste;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Liste|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,13 @@ class ListeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function testFunction($value): ?Liste
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.owner = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult(Query::HYDRATE_OBJECT);
+    }
 }

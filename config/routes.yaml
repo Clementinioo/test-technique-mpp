@@ -5,3 +5,15 @@
 index:
     path: /
     controller: App\Controller\IndexController::index
+
+liste_new:
+    path: /liste/new
+    controller: App\Controller\ListeController:createAction
+
+liste_all:
+    path: /liste/all
+    controller: App\Controller\ListeController::showAction
+
+my_lists:
+    path: /my/lists
+    controller: App\Controller\ListeController::showOwnLists
