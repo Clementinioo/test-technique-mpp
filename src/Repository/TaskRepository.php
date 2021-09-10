@@ -47,4 +47,13 @@ class TaskRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllTasksByIdList($id)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.id_liste = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

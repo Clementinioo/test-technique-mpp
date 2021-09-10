@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		{% if task is not empty %}
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Description</th>
+						<th>Id Liste</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for l in task %}
+						<tr>
+							<td>{{ l.id }}</td>
+							<td>{{ l.description }}</td>
+							<td>{{ l.idliste }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No list found.</p>
+		{% endif %}
+	</div>
+</div>
+
+<a href="{{ path('index') }}">Retour au menu</a>

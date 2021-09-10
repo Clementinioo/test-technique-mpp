@@ -25,3 +25,11 @@ liste-edit:
 task_new:
     path: /task/new
     controller: App\Controller\TaskController:createAction
+
+task_all:
+    path: /task/all
+    controller: App\Controller\TaskController::showAction
+
+my_tasks:
+    path: /my/tasks
+    controller: App\Controller\TaskController::showAction

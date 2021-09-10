@@ -46,4 +46,17 @@ class TaskController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/task/all")
+     */
+    public function showAction()
+    {
+        $task = $this->getDoctrine()->getRepository(Task::class);
+        $task = $task->findAll();
+        return $this->render(
+            'task/tasks.html.twig',
+            array('task' => $task)
+        );
+    }
 }
