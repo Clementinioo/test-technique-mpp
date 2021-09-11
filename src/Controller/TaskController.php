@@ -59,4 +59,73 @@ class TaskController extends AbstractController
             array('task' => $task)
         );
     }
+
+    /**
+     * @Route("/my/tasks")
+     */
+    public function showOwnLists()
+    {
+        $repository = $this->getDoctrine()->getRepository(Task::class);
+        $array = array();
+        $task = $repository->findOwnTasks($this->getUser()->getUsername());
+        if (!empty($task)) {
+            return $this->render(
+                'task/ownertasks.html.twig',
+                array('task' => $task)
+            );
+        } else {
+            return $this->render(
+                'task/ownertasks.html.twig',
+                array('task' => null)
+            );
+        }
+    }
+
+    /**
+     * @Route("/task/delete/{id}" , name="task_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $task = $this->getDoctrine()->getRepository(Task::class);
+        $task = $task->find($id);
+        if (!$task) {
+            throw $this->createNotFoundException(
+                'Il n\'y a pas de liste avec l\'id : ' . $id
+            );
+        }
+        $em->remove($task);
+        $em->flush();
+        return $this->redirect($this->generateUrl('my_tasks'));
+    }
+
+    /**
+     * @Route("/task/edit/{id}", name="task_edit")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $task = $this->getDoctrine()->getRepository(Task::class);
+        $task = $task->find($id);
+        if (!$task) {
+            throw $this->createNotFoundException(
+                'Il n\'y a pas de liste avec l\'id : ' . $id
+            );
+        }
+        $form = $this->createFormBuilder($task)
+            ->add('description', TextType::class)
+            ->add('id_liste', TextType::class)
+            ->add('save', SubmitType::class, array('label' => 'Editer'))
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $task = $form->getData();
+            $em->flush();
+            return $this->redirect($this->generateUrl('my_tasks'));
+        }
+        return $this->render(
+            'task/edit.html.twig',
+            array('form' => $form->createView())
+        );
+    }
 }

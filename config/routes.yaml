@@ -32,4 +32,12 @@ task_all:
 
 my_tasks:
     path: /my/tasks
-    controller: App\Controller\TaskController::showAction
+    controller: App\Controller\TaskController::showOwnLists
+
+task-delete: 
+    path: /task/delete
+    controller: App\Controller\TaskController::deleteAction
+
+task-edit:
+    path: /task/edit
+    controller: App\Controller\TaskController::updateAction

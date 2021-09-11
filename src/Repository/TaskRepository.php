@@ -56,4 +56,20 @@ class TaskRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findOwnTasks($user)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT t.id, t.description, t.id_liste 
+            FROM task t
+            LEFT JOIN liste l ON t.id_liste = l.id
+            WHERE l.owner = :user;
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['user' => $user]);
+
+        return $stmt->fetchAllAssociative();
+    }
 }

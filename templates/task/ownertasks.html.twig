@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row">
+		{% if task is not empty %}
+			<table>
+				<thead>
+					<tr>
+						<th>Id Task</th>
+						<th>Description</th>
+						<th>Id Liste</th>
+						<th>Supprimer</th>
+						<th>Editer</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for l in task %}
+						<tr>
+							<td>{{ l.id }}</td>
+							<td>{{ l.description }}</td>
+							<td>{{ l.id_liste }}</td>
+							<td>
+								<a href="/task/delete/{{ l.id }}">Supprimer</a>
+							</td>
+							<td>
+								<a href="/task/edit/{{ l.id }}">Editer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No task found.</p>
+		{% endif %}
+	</div>
+</div>
+
+<a href="{{ path('index') }}">Retour au menu</a>
