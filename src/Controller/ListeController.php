@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Liste;
+use App\Entity\Task;
 use App\Repository\ListeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -85,10 +86,17 @@ class ListeController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $liste = $this->getDoctrine()->getRepository(Liste::class);
         $liste = $liste->find($id);
+        $task = $this->getDoctrine()->getRepository(Task::class);
+        $task = $task->findBy([
+            'id_liste' => $id,
+        ]);
         if (!$liste) {
             throw $this->createNotFoundException(
                 'Il n\'y a pas de liste avec l\'id : ' . $id
             );
+        }
+        foreach ($task as $t) {
+            $em->remove($t);
         }
         $em->remove($liste);
         $em->flush();
