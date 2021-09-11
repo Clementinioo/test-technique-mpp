@@ -48,6 +48,12 @@ class TaskRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * 
+     * Affiche toutes les tâches d'une liste selon son id 
+     * 
+     */
+
     public function findAllTasksByIdList($id)
     {
         return $this->createQueryBuilder('t')
@@ -56,6 +62,12 @@ class TaskRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * 
+     * Affiche les tâches d'un utilisateur en particulier
+     *  
+     */
 
     public function findOwnTasks($user)
     {

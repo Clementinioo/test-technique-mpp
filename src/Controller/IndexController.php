@@ -16,7 +16,6 @@ class IndexController extends AbstractController
         } else {
             $user = "";
         }
-        //var_dump($user);
         return $this->render('index/index.html.twig', [
             'username' => $user,
         ]);

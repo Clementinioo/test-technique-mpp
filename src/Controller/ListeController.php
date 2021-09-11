@@ -17,6 +17,9 @@ class ListeController extends AbstractController
 
     /**
      * @Route("/liste/new")
+     * 
+     * Créer une liste
+     * 
      */
 
 
@@ -45,7 +48,11 @@ class ListeController extends AbstractController
 
     /**
      * @Route("/liste/all")
+     * 
+     * Affiche toutes les les listes
+     * 
      */
+
     public function showAction()
     {
         $liste = $this->getDoctrine()->getRepository(Liste::class);
@@ -58,12 +65,16 @@ class ListeController extends AbstractController
 
     /**
      * @Route("/my/lists")
+     * 
+     * Affiche les listes de l'utilisateur connecté
+     * 
      */
+
     public function showOwnLists()
     {
         $repository = $this->getDoctrine()->getRepository(Liste::class);
         $array = array();
-        $liste = $repository->testFunction($this->getUser()->getUsername());
+        $liste = $repository->getOwnLists($this->getUser()->getUsername());
         array_push($array, $liste);
         if ($array[0] != null) {
             return $this->render(
@@ -80,7 +91,11 @@ class ListeController extends AbstractController
 
     /**
      * @Route("/liste/delete/{id}" , name="liste_delete")
+     * 
+     * Supprime une liste et supprime en cascades les tâches associés à la liste.
+     * 
      */
+
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -105,7 +120,10 @@ class ListeController extends AbstractController
 
     /**
      * @Route("/liste/edit/{id}", name="liste_edit")
+     * 
+     * Edition d'une liste
      */
+
     public function updateAction(Request $request, $id)
     {
         $liste = $this->getDoctrine()->getRepository(Liste::class);

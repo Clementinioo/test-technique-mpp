@@ -20,7 +20,10 @@ class TaskController extends AbstractController
 {
 
     /**
-     * @Route("/liste/new")
+     * @Route("/task/new")
+     * 
+     * Créer une tâche
+     * 
      */
 
 
@@ -49,7 +52,11 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/task/all")
+     * 
+     * Affiche toutes les tâches 
+     * 
      */
+
     public function showAction()
     {
         $task = $this->getDoctrine()->getRepository(Task::class);
@@ -62,6 +69,8 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/my/tasks")
+     * 
+     * Affiche les tâches de l'utilisateur connecté
      */
     public function showOwnLists()
     {
@@ -83,7 +92,11 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/task/delete/{id}" , name="task_delete")
+     * 
+     * Suppression d'une tâche 
+     * 
      */
+
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -101,7 +114,11 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/task/edit/{id}", name="task_edit")
+     * 
+     * Edition d'une tâche 
+     * 
      */
+
     public function updateAction(Request $request, $id)
     {
         $task = $this->getDoctrine()->getRepository(Task::class);

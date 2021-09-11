@@ -49,7 +49,13 @@ class ListeRepository extends ServiceEntityRepository
     }
     */
 
-    public function testFunction($value): ?Liste
+    /**
+     * 
+     * Récupère les listes d'un utilisateur 
+     * 
+     */
+
+    public function getOwnLists($value): ?Liste
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.owner = :val')
