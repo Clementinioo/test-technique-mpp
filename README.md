@@ -6,8 +6,18 @@ Temps passé dessus approximativement : ~4-5h
 
 ## Librairies utilisées
 
-API Platform pour la simplicité de la mise en place de l'API REST
+API Platform pour la simplicité de la mise en place de l'API REST (/api)
 Security/Registration pour l'authentification 
+
+## Fonctionnalités
+
+- Inscription
+- Authentification login/pw / Déconnexion
+- Création de liste
+- Création de tâche
+- Suppression en cascade : Si liste supprimé comportant des tâches, alors tâches également supprimé
+- Edition/Suppression d'une liste/tâche uniquement possible pour son propriétaire
+- Visualisation de toutes les listes et toutes les taches par tous les utilisateurs
 
 ## Difficultés rencontrées 
 
@@ -17,5 +27,5 @@ Security/Registration pour l'authentification
 
 ## Motivations
 
-Je reste très motivé à l'idée de rejoindre MonPetitPlacement dans l'idée de débuter ma carrière professionnelle, et en tant que développeur Junior, progresser et apprendre autour d'une équipe expérimentée. J'ai la volonté et la curiosité d'en apprendre davantage sur les bonnes techniques à adopter avec Symfony et à développer d'autant plus mes compétences.
+Je reste très motivé à l'idée de rejoindre MonPetitPlacement dans l'idée de débuter ma carrière professionnelle, et en tant que développeur Junior, progresser et apprendre autour d'une équipe expérimentée. J'ai la volonté et la curiosité d'en apprendre davantage sur les bonnes techniques et les façon de coder à adopter avec Symfony et toute la stack technique. Je souhaite pouvoir développer mes compétences techniques et humaines au sein d'une bonne ambiance de travail.
 
